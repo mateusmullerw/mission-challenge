@@ -1,0 +1,16 @@
+@import 'colors';
+
+.navbar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: .8rem 1rem;
+    border-bottom: 1px solid $outline;
+    background-color: $white;
+    color: $primary;
+}
+
+.logo{
+    margin: 0;
+    padding: .5rem;
+}

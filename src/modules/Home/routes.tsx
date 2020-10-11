@@ -8,7 +8,7 @@ const Routes = () => (
     <Switch>
       <Redirect exact from="/home" to="/home/cadastro" />
       <Route exact path={`/home/cadastro`} component={RegisterProduct} />
-      <Route exact path={`/home/lista`} component={ProductList} />
+      <Route exact path={`/home/produtos`} component={ProductList} />
     </Switch>
   </div>
 );

@@ -1,0 +1,22 @@
+@import "colors";
+
+.button {
+  position: relative;
+  border: 0;
+  border-radius: 3px;
+  padding: 11px 15px;
+  font-size: 0.875rem;
+  font-weight: 400;
+  background-color: $primary;
+  color: $text-over-primary;
+  transition: all 100ms ease-in-out;
+
+  &:hover {
+    background-color: $primary-dark;
+  }
+  &--loading {
+    &:hover {
+      background-color: $primary;
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@import "colors";
+
+.product-card {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 700px;
+  background-color: $white;
+  padding: 1rem;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+
+  &__info {
+    flex-grow: 1;
+    margin-right: 0.5rem;
+  }
+  &__name {
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  &__price {
+    margin: 0;
+    color: $text-secondary;
+  }
+}

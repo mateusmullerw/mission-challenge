@@ -1,0 +1,25 @@
+@import "colors";
+
+.input {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+
+  &__field {
+    border: 1px solid $outline;
+    border-radius: 3px;
+    padding: 10px 15px;
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: $text-primary;
+    margin-top: 0.3rem;
+  }
+  &__caption {
+    font-size: 0.8125rem;
+    font-weight: 400;
+    color: $text-primary;
+    margin-top: 0.3rem;
+    margin-bottom: 0;
+  }
+}
