@@ -12,9 +12,11 @@ export default function Admin() {
   const location = useLocation();
 
   useEffect(() => {
-    location.pathname === "/admin/produtos"
-      ? setActiveItem(1)
-      : setActiveItem(0);
+    if (location.pathname === "/admin/cadastro") {
+      setActiveItem(0);
+    } else if (location.pathname === "/admin/produtos") {
+      setActiveItem(1);
+    }
   }, [location.pathname]);
 
   const adminPages = [
