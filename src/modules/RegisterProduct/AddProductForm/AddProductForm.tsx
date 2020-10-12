@@ -21,8 +21,8 @@ const AddProductForm = (props: Iprops) => {
   const registerFormValidator = Yup.object().shape({
     name: Yup.string().required("Este campo é obrigatório."),
     price: Yup.number()
-      .min(1, "Valor mínimo de R$ 1,00")
-      .required("Informe o valor do produto"),
+      .min(1, "O valor deve ser maior que zero.")
+      .required("Informe o valor do produto."),
   });
 
   const formik = useFormik({
