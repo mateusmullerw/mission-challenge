@@ -37,11 +37,17 @@ export default function Admin() {
           >
             Admin
           </h3>
-          <ul className={`menu__list ${isMobile() ? "menu__list--mobile" : ""}`}>
-            <MenuItemActiveIndicator activeItem={activeItem} tabAmount={adminPages.length}/>
+          <ul
+            className={`menu__list ${isMobile() ? "menu__list--mobile" : ""}`}
+          >
+            <MenuItemActiveIndicator
+              activeItem={activeItem}
+              tabAmount={adminPages.length}
+            />
             {adminPages.map((page, index) => {
               return (
                 <MenuItem
+                  key={page.to}
                   to={page.to}
                   label={page.label}
                   active={activeItem === index}

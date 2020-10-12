@@ -28,49 +28,50 @@ const Navbar = () => {
   };
   return (
     <div className="navbar">
-        <Link className="navbar__logo" to="/">
-          Mission Challenge
-        </Link>
-        {isMobile() ? (
-          <>
-            <button onClick={() => handleOpen()} className="navbar__button">
-              <i className="material-icons">menu</i>
-            </button>
-            <div
-              className={`navbar__menu--mobile ${
-                isMenuOpen ? "navbar__menu--mobile--open" : ""
-              }`}
+      <Link className="navbar__logo" to="/">
+        Mission Challenge
+      </Link>
+      {isMobile() ? (
+        <>
+          <button onClick={() => handleOpen()} className="navbar__button">
+            <i className="material-icons">menu</i>
+          </button>
+          <div
+            className={`navbar__menu--mobile ${
+              isMenuOpen ? "navbar__menu--mobile--open" : ""
+            }`}
+          >
+            <button
+              onClick={() => handleClose()}
+              className="navbar__button navbar__button--close"
             >
-              <button
-                onClick={() => handleClose()}
-                className="navbar__button navbar__button--close"
-              >
-                <i className="material-icons">close</i>
-              </button>
-              {menuLinks.map((link) => {
-                return (
-                  <Link
-                    onClick={() => handleClose()}
-                    className="navbar__link navbar__link--mobile"
-                    to={link.to}
-                  >
-                    {link.label}
-                  </Link>
-                );
-              })}
-            </div>
-          </>
-        ) : (
-          <div className="navbar__menu">
+              <i className="material-icons">close</i>
+            </button>
             {menuLinks.map((link) => {
               return (
-                <Link className="navbar__link" to={link.to}>
+                <Link
+                  key={link.to}
+                  onClick={() => handleClose()}
+                  className="navbar__link navbar__link--mobile"
+                  to={link.to}
+                >
                   {link.label}
                 </Link>
               );
             })}
           </div>
-        )}
+        </>
+      ) : (
+        <div className="navbar__menu">
+          {menuLinks.map((link) => {
+            return (
+              <Link key={link.to} className="navbar__link" to={link.to}>
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };
