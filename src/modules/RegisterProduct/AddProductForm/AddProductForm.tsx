@@ -58,9 +58,13 @@ const AddProductForm = (props: Iprops) => {
   }, [customValue, setFieldValue]);
 
   function maskPrice(price: number) {
-    console.log(formatPrice(price.toString()));
-    setMaskedPrice(formatPrice(price.toString()));
-    setcustomValue(price);
+    if (isNaN(price)) {
+      setMaskedPrice("");
+      setcustomValue(0);
+    } else {
+      setMaskedPrice(formatPrice(price.toString()));
+      setcustomValue(price);
+    }
   }
   return (
     <form
@@ -89,7 +93,6 @@ const AddProductForm = (props: Iprops) => {
         value={maskedPrice}
         onChange={(e) => {
           let userInput = e.target.value.replace(/\D/g, "");
-          console.log(userInput);
           maskPrice(parseInt(userInput));
         }}
         onBlur={handleBlur}

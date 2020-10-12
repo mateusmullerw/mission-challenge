@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProductCardAdmin.scss";
 import { connect } from "react-redux";
-import { deleteProduct } from "../../redux/actions";
+import { deleteProduct, deleteItemFromCart } from "../../redux/actions";
 import Button from "../Button/Button";
 import { formatPrice } from "../../utils/formatPrice";
 
@@ -12,6 +12,7 @@ interface IProductCardProps {
     name: string;
   };
   deleteProduct: Function;
+  deleteItemFromCart: Function;
   key: number;
 }
 
@@ -22,6 +23,7 @@ const ProductCard = (props: IProductCardProps) => {
 
   const handleDelete = (id: number) => {
     props.deleteProduct(id);
+    props.deleteItemFromCart(id);
   };
 
   return (
@@ -35,4 +37,4 @@ const ProductCard = (props: IProductCardProps) => {
   );
 };
 
-export default connect(null, { deleteProduct })(ProductCard);
+export default connect(null, { deleteProduct, deleteItemFromCart })(ProductCard);

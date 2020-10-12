@@ -6,15 +6,15 @@
   height: $navbar-height;
   display: flex;
   justify-content: space-between;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 3rem;
   border-bottom: 1px solid $outline;
   background-color: $white;
-
+  z-index: 2000;
   &__logo {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
-    padding: 0.5rem;
+    padding: 0.5rem 0;
     text-decoration: none;
     color: $primary;
 
@@ -22,10 +22,32 @@
       color: $primary-dark;
     }
   }
-  &__link-container {
+  &__menu {
     height: 100%;
     display: flex;
     align-items: center;
+
+    &--mobile {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      padding: 0.8rem 3rem;
+      background-color: $primary;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      opacity: 0.5;
+      clip-path: circle(0% at calc(100% - 72px) 35px);
+      transition: all 300ms ease-in-out;
+
+      &--open {
+        opacity: 1;
+        clip-path: circle(150% at calc(100% - 72px) 35px);
+      }
+    }
   }
   &__link {
     font-weight: 700;
@@ -33,10 +55,42 @@
     padding: 0.5rem;
     text-decoration: none;
     color: $primary;
+    &:not(:last-child){
+      margin-right: 1rem;
+    }
 
     &:hover {
       color: $primary-dark;
       text-decoration: underline;
+    }
+
+    &--mobile {
+      color: $white;
+      padding: 1rem;
+
+      &:not(:last-child){
+        margin-right: 0rem;
+      }
+      &:hover {
+        color: $white;
+        text-decoration: underline;
+      }
+    }
+  }
+  &__button {
+    background-color: transparent;
+    border: 0;
+    width: 3rem;
+    height: 3rem;
+    & i {
+      color: $text-primary;
+      font-size: 2rem;
+    }
+    &--close {
+      align-self: flex-end;
+      & i {
+        color: $white;
+      }
     }
   }
 }

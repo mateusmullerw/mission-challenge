@@ -40,6 +40,7 @@ const ProductCard = (props: IProductCardProps) => {
           fullWidth
           label="Adicionar ao carrinho"
           isLoading={isLoading}
+          disabled={isLoading}
           onClick={() => handleAddToCart(id)}
         />
       </div>

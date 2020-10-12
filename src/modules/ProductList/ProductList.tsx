@@ -17,7 +17,6 @@ interface IProduct {
 
 const ProductList = (props: IState) => {
   const products = props.products;
-  console.log(products);
   return (
     <>
       <PageTitle title="Produtos" />

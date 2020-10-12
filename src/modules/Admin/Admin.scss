@@ -7,6 +7,12 @@
   display: flex;
   background-color: $background;
   overflow: hidden;
+
+  &--mobile{
+    height: 100%;
+    flex-direction: column;
+    
+  }
 }
 
 .menu {
@@ -20,8 +26,13 @@
     width: 100%;
     text-align: center;
     margin: 1rem 0;
+    margin-top: 0;
     padding: 2rem 0;
     border-bottom: 1px solid $divider;
+
+    &--mobile{
+      padding: 1rem 0;
+    }
   }
 
   &__list {
@@ -31,11 +42,17 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+
+    &--mobile{
+      flex-direction: row;
+      
+    }
   }
 }
 
 .content {
   width: 100%;
+  flex-grow: 1;
   padding: 2rem;
   overflow-y: auto;
 }

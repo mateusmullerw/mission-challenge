@@ -5,6 +5,7 @@ import { getCartProducts } from "../../redux/selectors";
 import CartItem from "../../components/CartItem/CartItem";
 import "./Cart.scss";
 import { formatPrice } from "../../utils/formatPrice";
+import Container from "../../components/Container/Container";
 
 interface IStore {
   cart: Array<IProduct>;
@@ -28,21 +29,22 @@ const Cart = (props: IStore) => {
 
   return (
     <div className="cart">
-      <PageTitle title="Carrinho" />
-
-      {products && products.length ? (
-        <div className="cart__resume">
-          {products.map((product: IProduct) => {
-            return <CartItem key={product.id} product={product} />;
-          })}
-          <p className="cart__total-price">
-            <span>Preço total:</span>
-            {` R$ ${formattedPrice}`}
-          </p>
-        </div>
-      ) : (
-        <p>Seu carrinho está vazio.</p>
-      )}
+      <Container>
+        <PageTitle title="Carrinho" />
+        {products && products.length ? (
+          <div className="cart__resume">
+            {products.map((product: IProduct) => {
+              return <CartItem key={product.id} product={product} />;
+            })}
+            <p className="cart__total-price">
+              <span>Preço total:</span>
+              {` R$ ${formattedPrice}`}
+            </p>
+          </div>
+        ) : (
+          <p>Seu carrinho está vazio.</p>
+        )}
+      </Container>
     </div>
   );
 };

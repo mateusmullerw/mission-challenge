@@ -3,8 +3,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import AdminRoutes from "./routes";
 import "./Admin.scss";
 import MenuItem from "../../components/MenuItem/MenuItem";
-import MenuActiveIndicator from "../../components/MenuActiveIndicator/MenuActiveIndicator";
+import MenuItemActiveIndicator from "../../components/MenuItemActiveIndicator/MenuItemActiveIndicator";
 import { useLocation } from "react-router-dom";
+import isMobile from "../../utils/isMobile";
 
 export default function Admin() {
   const [activeItem, setActiveItem] = useState(0);
@@ -16,25 +17,38 @@ export default function Admin() {
       : setActiveItem(0);
   }, [location.pathname]);
 
+  const adminPages = [
+    {
+      label: "Cadastrar produto",
+      to: "/admin/cadastro",
+    },
+    {
+      label: "Produtos",
+      to: "/admin/produtos",
+    },
+  ];
+
   return (
-    <div className="admin">
+    <div className={`admin ${isMobile() ? "admin--mobile" : ""}`}>
       <Router>
         <div className="menu">
-          <h3 className="menu__title">Admin</h3>
-          <ul className="menu__list">
-            <MenuActiveIndicator activeItem={activeItem} />
-            <MenuItem
-              to="/admin/cadastro"
-              label="Cadastrar produto"
-              active={activeItem === 0}
-              onClick={() => setActiveItem(0)}
-            />
-            <MenuItem
-              to="/admin/produtos"
-              label="Produtos"
-              active={activeItem === 1}
-              onClick={() => setActiveItem(1)}
-            />
+          <h3
+            className={`menu__title ${isMobile() ? "menu__title--mobile" : ""}`}
+          >
+            Admin
+          </h3>
+          <ul className={`menu__list ${isMobile() ? "menu__list--mobile" : ""}`}>
+            <MenuItemActiveIndicator activeItem={activeItem} tabAmount={adminPages.length}/>
+            {adminPages.map((page, index) => {
+              return (
+                <MenuItem
+                  to={page.to}
+                  label={page.label}
+                  active={activeItem === index}
+                  onClick={() => setActiveItem(index)}
+                />
+              );
+            })}
           </ul>
         </div>
         <div className="content">

@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { getProducts } from "../../redux/selectors";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import "./Home.scss";
+import Container from "../../components/Container/Container";
 
 interface IStore {
   products: Array<IProduct>;
@@ -20,6 +21,7 @@ const ProductList = (props: IStore) => {
   const products = props.products;
   return (
     <div className="home">
+      <Container>
       <PageTitle title="Vitrine" />
       <div className="product-container">
         {products && products.length ? (
@@ -30,6 +32,7 @@ const ProductList = (props: IStore) => {
           <p>Nenhum produto cadastrado.</p>
         )}
       </div>
+      </Container>
     </div>
   );
 };
