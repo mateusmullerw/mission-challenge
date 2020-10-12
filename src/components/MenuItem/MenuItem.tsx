@@ -6,21 +6,20 @@ interface IMenuItemProps {
   to: string;
   label: string;
   active: boolean;
-  startIcon?: object;
   onClick: (ev: React.MouseEvent<HTMLAnchorElement>) => void;
 }
 
 const MenuItem = (props: IMenuItemProps) => {
-  const {
-    to,
-    label,
-    active,
-    startIcon,
-    onClick
-  } = props;
+  const { to, label, active, onClick } = props;
 
   return (
-      <Link className={`menu-item ${active ? 'menu-item--active' : ''}`} to={to} onClick={onClick}>{label}</Link>
+    <Link
+      className={`menu-item ${active ? "menu-item--active" : ""}`}
+      to={to}
+      onClick={onClick}
+    >
+      {label}
+    </Link>
   );
 };
 

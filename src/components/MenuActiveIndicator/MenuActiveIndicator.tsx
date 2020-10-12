@@ -6,13 +6,14 @@ interface IButtonProps {
 }
 
 const MenuActiveIndicator = (props: IButtonProps) => {
-  const {
-    activeItem
-  } = props;
+  const { activeItem } = props;
 
   return (
     //activeItem * MenuItem height(line-height + padding)
-    <div className="menu-active-indicator" style={{top: `${activeItem * 3}rem`}}></div>
+    <div
+      className="menu-active-indicator"
+      style={{ top: `${activeItem * 3}rem` }}
+    ></div>
   );
 };
 

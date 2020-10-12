@@ -1,19 +1,19 @@
-@import 'colors';
+@import "colors";
 
-.menu-item{
-    text-decoration: none;
-    width: 100%;
-    line-height: 2rem;
-    padding: .5rem 1rem;
-    background-color: $white;
-    color: $text-secondary;
+.menu-item {
+  text-decoration: none;
+  width: 100%;
+  line-height: 2rem;
+  padding: 0.5rem 1rem;
+  background-color: $white;
+  color: $text-secondary;
 
-    &:hover {
-        background-color: $hover;
-    }
-    
-    &--active{
-        font-weight: 500;
-        color: $text-primary;
-    }
+  &:hover {
+    background-color: $hover;
+  }
+
+  &--active {
+    font-weight: 500;
+    color: $text-primary;
+  }
 }

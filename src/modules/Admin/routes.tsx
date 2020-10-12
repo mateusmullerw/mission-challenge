@@ -6,9 +6,9 @@ import ProductList from "../ProductList/ProductList";
 const Routes = () => (
   <div className="view-routes">
     <Switch>
-      <Redirect exact from="/home" to="/home/cadastro" />
-      <Route exact path={`/home/cadastro`} component={RegisterProduct} />
-      <Route exact path={`/home/produtos`} component={ProductList} />
+      <Redirect exact from="/admin" to="/admin/cadastro" />
+      <Route exact path={`/admin/cadastro`} component={RegisterProduct} />
+      <Route exact path={`/admin/produtos`} component={ProductList} />
     </Switch>
   </div>
 );

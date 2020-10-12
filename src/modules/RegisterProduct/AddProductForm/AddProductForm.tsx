@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Button from "../../../components/Button/Button";
 import Input from "../../../components/Input/Input";
-import { Formik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./AddProductForm.scss";
 import { connect } from "react-redux";
 import { addProduct } from "../../../redux/actions";
+import { formatPrice } from "../../../utils/formatPrice";
 
 interface FormValues {
   name: string;
@@ -17,8 +18,6 @@ interface Iprops {
 }
 
 const AddProductForm = (props: Iprops) => {
-  const initialValues: FormValues = { name: "", price: 0 };
-
   const registerFormValidator = Yup.object().shape({
     name: Yup.string().required("Este campo é obrigatório."),
     price: Yup.number()
@@ -26,57 +25,82 @@ const AddProductForm = (props: Iprops) => {
       .required("Informe o valor do produto"),
   });
 
+  const formik = useFormik({
+    initialValues: { name: "", price: 0 },
+    validationSchema: registerFormValidator,
+    onSubmit: (values, actions) => {
+      setTimeout(() => {
+        props.addProduct(values);
+        actions.setSubmitting(false);
+        actions.resetForm();
+        setMaskedPrice("");
+        setcustomValue(0);
+      }, 800);
+    },
+  });
 
+  const {
+    handleSubmit,
+    errors,
+    values,
+    touched,
+    handleBlur,
+    handleChange,
+    isSubmitting,
+    setFieldValue,
+  } = formik;
+
+  const [customValue, setcustomValue] = useState(0);
+  const [maskedPrice, setMaskedPrice] = useState("");
+
+  useEffect(() => {
+    setFieldValue("price", customValue);
+  }, [customValue, setFieldValue]);
+
+  function maskPrice(price: number) {
+    console.log(formatPrice(price.toString()));
+    setMaskedPrice(formatPrice(price.toString()));
+    setcustomValue(price);
+  }
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={registerFormValidator}
-      onSubmit={(values, actions) => {
-        setTimeout(() => {
-          props.addProduct(values);
-          actions.setSubmitting(false);
-          actions.resetForm();
-        }, 800);
+    <form
+      className="form"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSubmit();
       }}
     >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-        isSubmitting,
-      }) => (
-        <form
-          className="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            handleSubmit();
-          }}
-        >
-          <Input
-            label="Nome"
-            name="name"
-            type="text"
-            caption={touched.name ? errors.name : ""}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.name}
-          />
-          <Input
-            label="Preço"
-            name="price"
-            type="number"
-            caption={touched.price ? errors.price : ""}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.price}
-          />
-          <Button label="Cadastrar" isLoading={isSubmitting} disabled={isSubmitting} type="submit" />
-        </form>
-      )}
-    </Formik>
+      <Input
+        label="Nome"
+        name="name"
+        type="text"
+        caption={touched.name ? errors.name : ""}
+        error={touched.name && !!errors.name}
+        value={values.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+      />
+      <Input
+        label="Preço"
+        name="price"
+        type="text"
+        caption={touched.price ? errors.price : ""}
+        error={touched.price && !!errors.price}
+        value={maskedPrice}
+        onChange={(e) => {
+          let userInput = e.target.value.replace(/\D/g, "");
+          console.log(userInput);
+          maskPrice(parseInt(userInput));
+        }}
+        onBlur={handleBlur}
+      />
+      <Button
+        label="Cadastrar"
+        isLoading={isSubmitting}
+        disabled={isSubmitting}
+        type="submit"
+      />
+    </form>
   );
 };
 export default connect(null, { addProduct })(AddProductForm);

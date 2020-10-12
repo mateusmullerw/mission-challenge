@@ -1,46 +1,39 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import HomeRoutes from "./routes";
+import React from "react";
+import PageTitle from "../../components/PageTitle/PageTitle";
+import { connect } from "react-redux";
+import { getProducts } from "../../redux/selectors";
+import ProductCard from "../../components/ProductCard/ProductCard";
 import "./Home.scss";
-import MenuItem from "../../components/MenuItem/MenuItem";
-import MenuActiveIndicator from "../../components/MenuActiveIndicator/MenuActiveIndicator";
-import { useLocation } from "react-router-dom";
 
-export default function Home() {
-  const [activeItem, setActiveItem] = useState(0);
-  const location = useLocation();
+interface IStore {
+  products: Array<IProduct>;
+  cart: Array<number>;
+}
 
-  useEffect(() => {
-    location.pathname === "/home/produtos"
-      ? setActiveItem(1)
-      : setActiveItem(0);
-  }, [location.pathname]);
+interface IProduct {
+  id: number;
+  name: string;
+  price: number;
+}
 
+const ProductList = (props: IStore) => {
+  const products = props.products;
   return (
     <div className="home">
-      <Router>
-        <div className="menu">
-          <h3 className="menu__title">Admin</h3>
-          <ul className="menu__list">
-            <MenuActiveIndicator activeItem={activeItem} />
-            <MenuItem
-              to="/home/cadastro"
-              label="Cadastrar produto"
-              active={activeItem === 0}
-              onClick={() => setActiveItem(0)}
-            />
-            <MenuItem
-              to="/home/produtos"
-              label="Produtos"
-              active={activeItem === 1}
-              onClick={() => setActiveItem(1)}
-            />
-          </ul>
-        </div>
-        <div className="content">
-          <HomeRoutes />
-        </div>
-      </Router>
+      <PageTitle title="Vitrine" />
+      <div className="product-container">
+        {products && products.length ? (
+          products.map((product: IProduct, index: number) => {
+            return <ProductCard key={index} product={product} />;
+          })
+        ) : (
+          <p>Nenhum produto cadastrado.</p>
+        )}
+      </div>
     </div>
   );
-}
+};
+
+const mapStateToProps = (state: IStore) => getProducts(state);
+
+export default connect(mapStateToProps)(ProductList);

@@ -5,14 +5,17 @@ import "./Button.scss";
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   label: string;
+  fullWidth?: boolean;
 }
 
 const Button = (props: IButtonProps) => {
-  const { isLoading, label, ...rest } = props;
+  const { isLoading, label, fullWidth, ...rest } = props;
 
   return (
     <button
-      className={`button ${isLoading ? "button--loading" : ""}`}
+      className={`button ${isLoading ? "button--loading" : ""} ${
+        fullWidth ? "button--full-width" : ""
+      }`}
       {...rest}
     >
       {label}

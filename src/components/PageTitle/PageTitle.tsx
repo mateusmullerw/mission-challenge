@@ -6,13 +6,9 @@ interface IPageTitleProps {
 }
 
 const PageTitle = (props: IPageTitleProps) => {
-  const {
-    title,
-  } = props;
+  const { title } = props;
 
-  return (
-    <h1 className="page-title">{title}</h1>
-  );
+  return <h1 className="page-title">{title}</h1>;
 };
 
 export default PageTitle;

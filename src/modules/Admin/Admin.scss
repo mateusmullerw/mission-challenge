@@ -1,0 +1,41 @@
+@import "colors";
+
+.admin {
+  width: 100%;
+  min-height: calc(100vh - 70px);
+  max-height: calc(100vh - 70px);
+  display: flex;
+  background-color: $background;
+  overflow: hidden;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 15.625rem;
+  background-color: $white;
+
+  &__title {
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0;
+    padding: 2rem 0;
+    border-bottom: 1px solid $divider;
+  }
+
+  &__list {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.content {
+  width: 100%;
+  padding: 2rem;
+  overflow-y: auto;
+}

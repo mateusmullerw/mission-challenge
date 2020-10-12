@@ -22,4 +22,15 @@
     margin-top: 0.3rem;
     margin-bottom: 0;
   }
+
+  &--error {
+    color: $error;
+    .input__field {
+      border: 1px solid $error;
+      color: $error;
+    }
+    .input__caption {
+      color: $error;
+    }
+  }
 }

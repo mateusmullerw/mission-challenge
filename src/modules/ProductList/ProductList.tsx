@@ -2,10 +2,11 @@ import React from "react";
 import PageTitle from "../../components/PageTitle/PageTitle";
 import { connect } from "react-redux";
 import { getProducts } from "../../redux/selectors";
-import ProductCard from "../../components/ProductCard/ProductCard";
+import ProductCardAdmin from "../../components/ProductCardAdmin/ProductCardAdmin";
 
 interface IState {
   products: Array<IProduct>;
+  cart: Array<number>;
 }
 
 interface IProduct {
@@ -16,12 +17,13 @@ interface IProduct {
 
 const ProductList = (props: IState) => {
   const products = props.products;
+  console.log(products);
   return (
     <>
       <PageTitle title="Produtos" />
       {products && products.length ? (
-        products.map((product: IProduct, index: number) => {
-          return <ProductCard key={index} product={product} />;
+        products.map((product: IProduct) => {
+          return <ProductCardAdmin key={product.id} product={product} />;
         })
       ) : (
         <p>Nenhum produto cadastrado.</p>

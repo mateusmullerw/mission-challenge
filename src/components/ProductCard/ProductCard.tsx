@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ProductCard.scss";
 import { connect } from "react-redux";
-import { deleteProduct } from "../../redux/actions";
+import { addToCart } from "../../redux/actions";
 import Button from "../Button/Button";
+import { formatPrice } from "../../utils/formatPrice";
 
 interface IProductCardProps {
   product: {
@@ -10,36 +11,40 @@ interface IProductCardProps {
     price: number;
     name: string;
   };
-  deleteProduct: Function;
+  addToCart: Function;
   key: number;
 }
 
 const ProductCard = (props: IProductCardProps) => {
   const { id, price, name } = props.product;
 
-  function formatPrice(price: string) {
-    let newPrice = price;
-    newPrice = newPrice.replace(/([0-9]{2})$/g, ",$1");
-    if (newPrice.length > 6)
-      newPrice = newPrice.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-    return newPrice;
-  }
+  const [isLoading, setIsLoading] = useState(false);
 
   const formattedPrice = price && formatPrice(price.toString());
 
-  const handleDelete = (id: number) => {
-    props.deleteProduct(id);
+  const handleAddToCart = (id: number) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      props.addToCart(id);
+      setIsLoading(false);
+    }, 500);
   };
 
   return (
     <div key={props.key} className="product-card">
+      <div className="product-card__img" />
       <div className="product-card__info">
         <h4 className="product-card__name">{name}</h4>
         <p className="product-card__price">{`R$ ${formattedPrice}`}</p>
+        <Button
+          fullWidth
+          label="Adicionar ao carrinho"
+          isLoading={isLoading}
+          onClick={() => handleAddToCart(id)}
+        />
       </div>
-      <Button label="Deletar" onClick={() => handleDelete(id)} />
     </div>
   );
 };
 
-export default connect(null, { deleteProduct })(ProductCard);
+export default connect(null, { addToCart })(ProductCard);
